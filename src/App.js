@@ -277,7 +277,7 @@ class App extends Component {
                 <div className="containerMid">
                   <Message message={this.state.messageBiskit} gagner={this.handleWin} perdu={this.handleLoose}/>
                   <MultiDe actualValue={this.state.actualValue} nbDe={2} tableDe={this.state.tableDe} shaked={this.state.shaked}/>
-                  <Bouton changeValue={this.handleTourBiskit}  />
+                  {!this.state.shaked && <Bouton changeValue={this.handleTourBiskit}  />}
                 </div>
               </div>
             </Route>
