@@ -82,7 +82,6 @@ class App extends Component {
     for (let i=0; i < copie.length ; i++){
       copie[i] = Math.floor(6*Math.random()); 
     } 
-    console.log(copie.map(x => x+1))
     this.setState({ actualValue : copie }) 
   }
 
@@ -119,7 +118,18 @@ class App extends Component {
   }
   handleTourBiskit = async () => {
     this.setState({ shaked : true })
-    await delay(1000);
+    this.handleGetRandom();
+    await delay(200);
+    this.handleGetRandom();
+    await delay(200);
+    this.handleGetRandom();
+    await delay(200);
+    this.handleGetRandom();
+    await delay(200);
+    this.handleGetRandom();
+    await delay(200);
+    this.handleGetRandom();
+    await delay(200);
     this.handleGetRandom();
     let copieMsg = this.state.messageBiskit;
     copieMsg ="";
