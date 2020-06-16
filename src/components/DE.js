@@ -1,8 +1,9 @@
 import React from 'react';
+import '../App.css'
 
 const De = props => {
     return (
-        <img className="de" src={props.image[props.valeur]}></img>
+        <img className={props.shaked ? 'de shaked' : 'de'} src={props.image[props.valeur]}></img>
     )
 }
 

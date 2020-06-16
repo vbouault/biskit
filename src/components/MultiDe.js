@@ -9,7 +9,7 @@ const MultiDe = props => {
         return index < props.nbDe 
       })
       .map( (value,index) => (
-        <De key={index} image={props.tableDe} valeur={props.actualValue[index]}/>
+        <De key={index} image={props.tableDe} valeur={props.actualValue[index]} shaked={props.shaked}/>
       ))}
   </div> 
   )

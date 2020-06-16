@@ -12,13 +12,16 @@ import MultiDe from './components/MultiDe';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import JoueurList from './components/JoueursList';
 import Message from './components/Message';
-import ChoosePlayers from './components/ChoosePlayers'
+import ChoosePlayers from './components/ChoosePlayers';
+
+const delay = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
 class App extends Component {
 
   state ={
     tableDe : [image1, image2, image3, image4, image5, image6],
     actualValue :[0,0],
+    shaked:false,
     nbDe:1,
     nbPlayers:2,
     messageBiskit:"",
@@ -114,7 +117,9 @@ class App extends Component {
     this.setState({ joueurs : copieJoueurs })
     this.setState({ messageBiskit : copieMsg })
   }
-  handleTourBiskit = () => {
+  handleTourBiskit = async () => {
+    this.setState({ shaked : true })
+    await delay(1000);
     this.handleGetRandom();
     let copieMsg = this.state.messageBiskit;
     copieMsg ="";
@@ -253,7 +258,7 @@ class App extends Component {
       copieMsg = `Perdu`;
       notDrink();
     }
-
+    this.setState({ shaked : false })
     this.setState({ messageBiskit : copieMsg })
     this.setState({ joueurs : copieJoueurs })
 
@@ -263,25 +268,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        {/*   <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/multi-dé">Jeux de dés classic</Link>
-              </li>
-              <li >
-                <Link to="/biskit">Biskit !</Link>
-              </li>
-            </ul>
-          </nav> */}
           <Switch>
-{/*             <Route path="/multi-dé">
-              <SelectNb changeNb={this.handleChangeNbDe} />
-              <MultiDe actualValue={this.state.actualValue} nbDe={this.state.nbDe} tableDe={this.state.tableDe}/>
-              <Bouton changeValue={this.handleGetRandom} />
-            </Route> */}
             <Route path="/biskit" >
               <div className="containerListDe">
                 <div className="containerList">
@@ -289,7 +276,7 @@ class App extends Component {
                 </div>
                 <div className="containerMid">
                   <Message message={this.state.messageBiskit} gagner={this.handleWin} perdu={this.handleLoose}/>
-                  <MultiDe actualValue={this.state.actualValue} nbDe={2} tableDe={this.state.tableDe}/>
+                  <MultiDe actualValue={this.state.actualValue} nbDe={2} tableDe={this.state.tableDe} shaked={this.state.shaked}/>
                   <Bouton changeValue={this.handleTourBiskit}  />
                 </div>
               </div>
